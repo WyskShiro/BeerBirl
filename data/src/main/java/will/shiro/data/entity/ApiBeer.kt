@@ -1,6 +1,8 @@
 package will.shiro.data.entity
 
 import com.google.gson.annotations.SerializedName
+import will.shiro.data.mapper.Mapper
+import will.shiro.domain.entity.Beer
 import java.io.Serializable
 
 /**
@@ -13,9 +15,9 @@ data class ApiBeer(
     @SerializedName("name") val name: String?
 ) : Serializable {
 
-//    object ApiBeerToBeer : will.shiro.data.mapper.Mapper<ApiBeer, Beer>() {
-//        override fun transform(t: ApiBeer) = Beer(
-//            name = t.name
-//        )
-//    }
+    object ApiBeerToBeer : Mapper<ApiBeer, Beer>() {
+        override fun transform(t: ApiBeer) = Beer(
+            name = t.name
+        )
+    }
 }

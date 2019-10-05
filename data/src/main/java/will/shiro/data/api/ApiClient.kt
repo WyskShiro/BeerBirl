@@ -9,6 +9,7 @@ import io.reactivex.SingleTransformer
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import will.shiro.data.entity.ApiBeer
 import will.shiro.data.request.RequestException
 
 /**
@@ -23,12 +24,12 @@ object ApiClient {
     private val apiServices: ApiService get() = apiServiceSingleton ?: buildApiServices()
 
     /**
-     * Fruits
+     * Beers
      * */
 
-//    fun getBeers(): Single<ApiBeer> {
-//        return makeRequest(apiServices.getFruit())
-//    }
+    fun getBeers(): Single<List<ApiBeer>> {
+        return makeRequest(apiServices.getBeers())
+    }
 
     /**
      *
