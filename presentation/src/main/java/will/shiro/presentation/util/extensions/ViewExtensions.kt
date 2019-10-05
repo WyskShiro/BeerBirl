@@ -4,9 +4,9 @@ import android.text.Editable
 import android.view.View
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputLayout
-import com.tem.plate.util.resources.SimpleTextWatcher
 import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
+import will.shiro.presentation.util.resources.SimpleTextWatcher
 
 
 // TextInputLayout

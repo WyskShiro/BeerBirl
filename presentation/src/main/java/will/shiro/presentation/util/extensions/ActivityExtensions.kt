@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import will.shiro.presentation.databinding.IncludedToolbarBinding
 
 // toolbar
 

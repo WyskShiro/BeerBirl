@@ -2,8 +2,6 @@ package will.shiro.presentation.util.resources
 
 import android.content.Context
 import androidx.annotation.StringRes
-import com.tem.domain.util.StringsProvider
-import com.tem.plate.R
 import will.shiro.domain.util.StringsProvider
 import will.shiro.presentation.R
 
