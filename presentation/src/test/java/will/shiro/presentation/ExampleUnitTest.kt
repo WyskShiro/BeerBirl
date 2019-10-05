@@ -1,8 +1,7 @@
-package will.shiro.beerbirl
-
-import org.junit.Test
+package will.shiro.presentation
 
 import org.junit.Assert.*
+import org.junit.Test
 
 /**
  * Example local unit test, which will execute on the development machine (host).
