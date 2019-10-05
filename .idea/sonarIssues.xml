@@ -318,6 +318,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/res/drawable/gradient_beer_borders.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/res/drawable/gradient_red_blue.xml">
           <value>
             <set />
@@ -333,12 +338,27 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/res/layout/item_list_beer.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/res/values/colors.xml">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/res/values/dimens.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/res/values/styles.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/../newpokedex/presentation/src/main/res/layout/item_list_pokemon.xml">
           <value>
             <set />
           </value>

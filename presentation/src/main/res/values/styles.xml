@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/beer_light</item>
     </style>
 
+    <style name="ItemListBeerText" parent="TextAppearance.AppCompat.Title">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>
