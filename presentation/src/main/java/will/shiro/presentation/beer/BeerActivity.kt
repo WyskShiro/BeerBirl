@@ -27,11 +27,4 @@ class BeerActivity : BaseActivity() {
     private fun setupUi() {
         // Set clicklisteners and textListeners
     }
-
-    companion object {
-
-        fun createIntent(context: Context): Intent {
-            return Intent(context, BeerActivity::class.java)
-        }
-    }
 }

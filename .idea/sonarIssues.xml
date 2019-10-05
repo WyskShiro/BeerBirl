@@ -18,6 +18,11 @@
             <set />
           </value>
         </entry>
+        <entry key="/fragment.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$USER_HOME$/Desktop/android_template/build.gradle">
           <value>
             <set />
@@ -188,7 +193,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/BeerDelegate.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/BeerViewModel.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/DefaultBeerDelegate.kt">
           <value>
             <set />
           </value>
@@ -289,6 +304,16 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/util/structure/dependecyinjector/ApplicationModule.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/util/structure/dependecyinjector/DelegateModule.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/util/structure/dependecyinjector/DelegatesModule.kt">
           <value>
             <set />
           </value>

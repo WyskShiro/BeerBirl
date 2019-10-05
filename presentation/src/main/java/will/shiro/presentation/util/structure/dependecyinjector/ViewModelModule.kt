@@ -7,5 +7,5 @@ import will.shiro.presentation.util.structure.base.BaseViewModel
 
 val viewModelModule = module {
     viewModel { BaseViewModel() }
-    viewModel { BeerViewModel() }
+    viewModel { BeerViewModel(get()) }
 }
