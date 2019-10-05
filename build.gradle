@@ -9,6 +9,7 @@ buildscript {
         versionCode = 1
         versionName = "1.0"
         apiURL = "https://api.punkapi.com/v2/"
+        stagingURL = ""
 
         // Sdk and tools
         buildToolsVersion = '27.0.3'
