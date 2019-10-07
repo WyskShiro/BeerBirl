@@ -118,6 +118,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/domain/src/main/java/will/shiro/domain/entity/Beer.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/domain/src/main/java/will/shiro/domain/entity/Fruit.kt">
           <value>
             <set />
@@ -234,6 +239,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/util/ErrorHandler.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/util/bindingadapter/BeerBindingAdapter.kt">
           <value>
             <set />
           </value>

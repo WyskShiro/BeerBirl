@@ -12,12 +12,16 @@ import java.io.Serializable
  * */
 
 data class ApiBeer(
-    @SerializedName("name") val name: String?
+    @SerializedName("name") val name: String?,
+    @SerializedName("image_url") val imageUrl: String?,
+    @SerializedName("description") val description: String?
 ) : Serializable {
 
     object ApiBeerToBeer : Mapper<ApiBeer, Beer>() {
         override fun transform(t: ApiBeer) = Beer(
-            name = t.name
+            name = t.name,
+            imageUrl = t.imageUrl,
+            description = t.description
         )
     }
 }
