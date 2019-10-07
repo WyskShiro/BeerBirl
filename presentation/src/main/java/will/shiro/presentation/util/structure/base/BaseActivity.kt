@@ -2,6 +2,7 @@ package will.shiro.presentation.util.structure.base
 
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import will.shiro.presentation.util.extensions.observeEvent
 import will.shiro.presentation.util.extensions.shortToast
@@ -15,6 +16,7 @@ abstract class BaseActivity : AppCompatActivity() {
         subscribeUi()
     }
 
+    @CallSuper
     open fun subscribeUi() {
         with(baseViewModel) {
             toast.observeEvent(this@BaseActivity, ::onNextToast)

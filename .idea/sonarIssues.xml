@@ -193,7 +193,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/BeerAdapter.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/BeerDelegate.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/BeerViewHolder.kt">
           <value>
             <set />
           </value>
@@ -239,6 +249,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/util/extensions/ContextExtensions.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/util/extensions/GeneralExtensions.kt">
           <value>
             <set />
           </value>
