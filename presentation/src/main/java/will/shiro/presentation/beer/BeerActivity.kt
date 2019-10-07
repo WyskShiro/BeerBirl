@@ -1,7 +1,5 @@
 package will.shiro.presentation.beer
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,7 +39,7 @@ class BeerActivity : BaseActivity() {
     }
 
     private fun setupAdapter() {
-        beerAdapter = BeerAdapter()
+        beerAdapter = BeerAdapter(::onBeerClicked)
     }
 
     private fun setupRecyclerView() {
@@ -55,5 +53,13 @@ class BeerActivity : BaseActivity() {
         safeLet(beers, beerAdapter) { beers, beerAdapter ->
             beerAdapter.setItems(beers)
         }
+    }
+
+    private fun onBeerClicked(beer: Beer) {
+        val bundle = Bundle()
+        val beerBottomSheet = BeerBottomSheet()
+        bundle.putSerializable(BeerBottomSheet.BEER_BUNDLE, beer)
+        beerBottomSheet.arguments = bundle
+        beerBottomSheet.show(supportFragmentManager, BeerBottomSheet.TAG)
     }
 }

@@ -203,6 +203,11 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/BeerBottomSheet.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/java/will/shiro/presentation/beer/BeerDelegate.kt">
           <value>
             <set />
@@ -379,6 +384,11 @@
           </value>
         </entry>
         <entry key="$PROJECT_DIR$/presentation/src/main/res/layout/activity_beer.xml">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/main/res/layout/bottom_sheet_beer.xml">
           <value>
             <set />
           </value>
