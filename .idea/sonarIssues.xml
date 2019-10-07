@@ -418,6 +418,21 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/test/java/will/shiro/presentation/ExampleUnitTest.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/test/java/will/shiro/presentation/_1_GetBeers.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/presentation/src/test/java/will/shiro/presentation/_2_CheckIfMappingObjectIsWorking.kt">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/../newpokedex/presentation/src/main/res/layout/item_list_pokemon.xml">
           <value>
             <set />
