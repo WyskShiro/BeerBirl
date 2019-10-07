@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="beer"
             type="will.shiro.domain.entity.Beer" />
@@ -12,16 +13,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/normal"
         android:background="@drawable/gradient_beer_borders"
         android:gravity="center"
-        android:padding="@dimen/normal"
-        android:layout_marginBottom="@dimen/normal" >
+        android:padding="@dimen/normal">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:setImage="@{beer.imageUrl}"
-            tools:src="@drawable/ic_back"/>
+            tools:src="@drawable/ic_back" />
 
         <TextView
             style="@style/ItemListBeerText"
@@ -30,6 +31,6 @@
             android:layout_marginStart="@dimen/normal"
             android:layout_marginEnd="@dimen/normal"
             android:text="@{beer.name}"
-            tools:text="Cervejinha"/>
+            tools:text="Cervejinha" />
     </LinearLayout>
 </layout>

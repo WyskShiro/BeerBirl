@@ -3,17 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_beer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/normal"
             android:layout_marginStart="@dimen/small"
+            android:layout_marginTop="@dimen/normal"
             android:layout_marginEnd="@dimen/small"
-            tools:listitem="@layout/item_list_beer"/>
+            tools:listitem="@layout/item_list_beer" />
     </LinearLayout>
 </layout>
