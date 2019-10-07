@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.OnLifecycleEvent
 import will.shiro.domain.entity.Beer
-import will.shiro.presentation.util.structure.arch.Event
 import will.shiro.presentation.util.structure.base.BaseViewModel
 
 class BeerViewModel(
     beerDelegate: BeerDelegate
 ) : BaseViewModel(),
-        BeerDelegate by beerDelegate {
+    BeerDelegate by beerDelegate {
 
     val beers: LiveData<List<Beer>> get() = _beers
 
@@ -20,15 +19,10 @@ class BeerViewModel(
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     private fun onCreate() {
-        getBeer(::getBeerOnSuccess, ::onFailure)
+        getBeer(::getBeerOnSuccess, {})
     }
 
     private fun getBeerOnSuccess(beers: List<Beer>) {
         _beers.value = beers
-    }
-
-    private fun onFailure(throwable: Throwable) {
-
-        val TODO = throwable
     }
 }

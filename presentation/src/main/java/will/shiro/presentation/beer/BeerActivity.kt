@@ -23,7 +23,6 @@ class BeerActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_beer)
         lifecycle.addObserver(viewModel)
-        setupUi()
         setupAdapter()
         setupRecyclerView()
         super.onCreate(savedInstanceState)
@@ -32,10 +31,6 @@ class BeerActivity : BaseActivity() {
     override fun subscribeUi() {
         super.subscribeUi()
         viewModel.beers.observe(this, ::onBeersReceived)
-    }
-
-    private fun setupUi() {
-        // Set clicklisteners and textListeners
     }
 
     private fun setupAdapter() {
