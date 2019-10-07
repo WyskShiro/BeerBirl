@@ -4,27 +4,12 @@ import android.content.Context
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import will.shiro.presentation.databinding.IncludedToolbarBinding
 
 // toolbar
 
 fun AppCompatActivity.showHomeButton() {
     supportActionBar!!.setDisplayShowHomeEnabled(true)
     supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-}
-
-//Toolbar
-fun AppCompatActivity.setupToolbar(
-    includedToolbarBinding: IncludedToolbarBinding,
-    showHome: Boolean = true,
-    title: String? = ""
-) {
-    includedToolbarBinding.toolbarTitle.text = title
-    setSupportActionBar(includedToolbarBinding.toolbar)
-    supportActionBar?.run {
-        setDisplayHomeAsUpEnabled(showHome)
-        setDisplayShowHomeEnabled(showHome)
-    }
 }
 
 //SoftKeyboard

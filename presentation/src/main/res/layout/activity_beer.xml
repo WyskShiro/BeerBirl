@@ -7,10 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/included_toolbar" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_beer"
             android:layout_width="match_parent"
