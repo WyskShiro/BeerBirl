@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <io.github.droidkaigi.confsched2020.ui.widget.CoordinatorLayoutInViewPagerHost
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:theme="@style/Theme.DroidKaigi"
+        >
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/fragment_sessions_coordinator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ScrollView
+                android:id="@+id/fragment_sessions_scroll_view"
+                style="@style/Widget.DroidKaigi.Backdrop.BackLayer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingBottom="40dp"
+                    >
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="24dp"
+                        />
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guideline_end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_end="16dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/filter_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/filter_title"
+                        android:textAppearance="@style/TextAppearance.DroidKaigi.Headline5"
+                        android:textColor="?attr/colorOnPrimary"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toTopOf="parent"
+                        />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/filter_reset"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/indigo_500"
+                        android:text="@string/filter_reset"
+                        android:textColor="?attr/colorOnPrimary"
+                        app:icon="@drawable/ic_close_black_24dp"
+                        app:iconSize="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/filter_title"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintTop_toTopOf="@id/filter_title"
+                        />
+
+                    <TextView
+                        android:id="@+id/filter_room_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/filter_room"
+                        android:textAppearance="@style/TextAppearance.DroidKaigi.Subtitle2"
+                        android:textColor="?attr/colorOnPrimary"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/filter_title"
+                        />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/room_filters"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:chipSpacingVertical="@dimen/session_filter_chip_vertical_margin"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/filter_room_title"
+                        />
+
+                    <TextView
+                        android:id="@+id/filter_language_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/filter_language"
+                        android:textAppearance="@style/TextAppearance.DroidKaigi.Subtitle2"
+                        android:textColor="?attr/colorOnPrimary"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/room_filters"
+                        />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/language_filters"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:chipSpacingVertical="@dimen/session_filter_chip_vertical_margin"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/filter_language_title"
+                        />
+
+                    <TextView
+                        android:id="@+id/filter_audience_category_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/filter_audience_category"
+                        android:textAppearance="@style/TextAppearance.DroidKaigi.Subtitle2"
+                        android:textColor="?attr/colorOnPrimary"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/language_filters"
+                        />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/audience_category_filters"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:chipSpacingVertical="@dimen/session_filter_chip_vertical_margin"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/filter_audience_category_title"
+                        />
+
+                    <TextView
+                        android:id="@+id/filter_category_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/filter_category"
+                        android:textAppearance="@style/TextAppearance.DroidKaigi.Subtitle2"
+                        android:textColor="?attr/colorOnPrimary"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/audience_category_filters"
+                        />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/category_filters"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:chipSpacingVertical="@dimen/session_filter_chip_vertical_margin"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/filter_category_title"
+                        />
+
+                    <TextView
+                        android:id="@+id/filter_language_support_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/filter_language_support"
+                        android:textAppearance="@style/TextAppearance.DroidKaigi.Subtitle2"
+                        android:textColor="?attr/colorOnPrimary"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/category_filters"
+                        />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/language_support_filters"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:chipSpacingVertical="@dimen/session_filter_chip_vertical_margin"
+                        app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@id/guideline_start"
+                        app:layout_constraintTop_toBottomOf="@id/filter_language_support_title"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+
+            <FrameLayout
+                android:id="@+id/sessions_sheet"
+                style="@style/Widget.DroidKaigi.BottomSheet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="bottom"
+                app:behavior_hideable="false"
+                app:behavior_peekHeight="64dp"
+                app:behavior_skipCollapsed="true"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+                tools:layout="@layout/fragment_bottom_sheet_sessions"
+                />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </io.github.droidkaigi.confsched2020.ui.widget.CoordinatorLayoutInViewPagerHost>
+</layout>

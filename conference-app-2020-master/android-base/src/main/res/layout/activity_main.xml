@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="io.github.droidkaigi.confsched2020.session.R" />
+
+        <import type="io.github.droidkaigi.confsched2020.ext.ContextsKt" />
+
+        <import type="androidx.databinding.adapters.Converters" />
+
+        <variable
+            name="isIndigoBackground"
+            type="boolean"
+            />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@{ContextsKt.getThemeColorDrawable(context, isIndigoBackground ? R.attr.colorPrimary : R.attr.colorSurface)}"
+        app:statusBarBackground="@{ContextsKt.getThemeColorDrawable(context, isIndigoBackground ? R.attr.colorPrimarySurface : R.attr.colorSurface)}"
+        tools:context=".MainActivity"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/content_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                android:background="@{ContextsKt.getThemeColor(context, isIndigoBackground ? R.attr.colorPrimarySurface : R.attr.colorSurface)}"
+                android:elevation="0dp"
+                app:contentInsetStartWithNavigation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:titleTextColor="@{ContextsKt.getThemeColor(context, isIndigoBackground ? R.attr.colorOnPrimarySurface : R.attr.colorOnSurface)}"
+                />
+
+            <!-- Ignore because FragmentContainerView bug. See https://github.com/DroidKaigi/conference-app-2020/issues/378 -->
+            <fragment
+                android:id="@+id/root_nav_host_fragment"
+                android:name="io.github.droidkaigi.confsched2020.ui.CustomNavHostFragment"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:defaultNavHost="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/toolbar"
+                app:navGraph="@navigation/navigation"
+                tools:ignore="FragmentTagUsage"
+                tools:layout="@layout/fragment_sessions"
+                />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            app:headerLayout="@layout/nav_drawer_header"
+            app:insetForeground="@android:color/transparent"
+            app:itemBackground="@android:color/transparent"
+            app:itemIconTint="@color/nav_drawer_item_selector"
+            app:itemTextColor="@color/nav_drawer_item_selector"
+            app:itemIconPadding="34dp"
+            app:menu="@menu/menu_nav_drawer"
+            />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>

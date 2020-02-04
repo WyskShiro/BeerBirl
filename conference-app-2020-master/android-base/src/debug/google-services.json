@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1056774738856",
+    "firebase_url": "https://droidkaigi-develop.firebaseio.com",
+    "project_id": "droidkaigi-develop",
+    "storage_bucket": "droidkaigi-develop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056774738856:android:a46268e90743805606439d",
+        "android_client_info": {
+          "package_name": "io.github.droidkaigi.confsched2020.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1056774738856-p1v6he33te9452v9imhos3mlmi7s60fi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtLF9qMoe17PLqhMGbV5LaWuDj-rhHB5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1056774738856-p1v6he33te9452v9imhos3mlmi7s60fi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

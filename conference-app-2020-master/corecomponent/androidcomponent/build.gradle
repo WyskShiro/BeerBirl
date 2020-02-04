@@ -1,0 +1,117 @@
+import dependencies.Dep
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-kapt'
+
+apply from: rootProject.file('gradle/android.gradle')
+android.dataBinding.enabled = true
+
+android.buildTypes.release {
+    consumerProguardFiles 'proguard-rules-navigation.pro'
+}
+
+dependencies {
+    implementation project(":model")
+    implementation Dep.AndroidX.constraint
+    implementation Dep.AndroidX.design
+    implementation Dep.AndroidX.browser
+    implementation Dep.Kotlin.stdlibJvm
+
+    api Dep.Insetter.insetter
+
+    implementation Dep.Dagger.androidSupport
+    api Dep.Kotlin.coroutines
+
+    api Dep.AndroidX.Navigation.runtimeKtx
+    api Dep.AndroidX.Navigation.fragmentKtx
+    api Dep.AndroidX.Navigation.uiKtx
+
+    api Dep.Play.core
+    api(Dep.AndroidX.Navigation.dynamicFeaturesFragment) {
+        transitive = false
+    }
+    api(Dep.AndroidX.Navigation.dynamicFeaturesRuntime) {
+        transitive = false
+    }
+
+    implementation Dep.Ktor.clientAndroid
+    implementation Dep.Firebase.firestoreKtx
+    implementation Dep.Firebase.auth
+
+    api Dep.AndroidX.activityKtx
+    api Dep.AndroidX.fragmentKtx
+    api Dep.AndroidX.coreKtx
+    api Dep.AndroidX.liveDataKtx
+    api Dep.AndroidX.liveDataCoreKtx
+    implementation Dep.AndroidX.Work.runtimeKtx
+    implementation Dep.liveEvent
+
+    implementation Dep.Dagger.core
+    implementation Dep.Dagger.androidSupport
+
+    implementation Dep.Groupie.groupie
+
+    implementation Dep.Coil.coil
+
+    implementation Dep.Timber.android
+
+    testImplementation Dep.Test.junit
+    testImplementation Dep.MockK.jvm
+    androidTestImplementation Dep.Test.testRunner
+    androidTestImplementation Dep.Test.espressoCore
+
+}
+repositories {
+    if (!isCi) {
+        maven {
+            url "https://maven-central-asia.storage-download.googleapis.com/repos/central/data/"
+        }
+    }
+    mavenCentral()
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        freeCompilerArgs = [
+                '-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi',
+                '-Xuse-experimental=kotlinx.coroutines.ObsoleteCoroutinesApi'
+        ]
+    }
+}
+
+task buildNavigationProguard doLast {
+    def navigationGraphXml = project.file("src/main/res/navigation/navigation.xml")
+
+    // XmlParser didn't work so let me use the dirty hack
+    if (!navigationGraphXml.text.contains("xmlns:app=\"http://schemas.android.com/apk/res-auto\"")) {
+        throw new GradleScriptException("the namespace has been changed from app")
+    }
+
+    def fqdns = []
+
+    navigationGraphXml.eachLine {
+        def line = it.trim()
+
+        if (line.startsWith("android:name=\"")) {
+            def className = line.substring("android:name=\"".length(), line.lastIndexOf("\""))
+
+            if (className.contains(".")) {
+                fqdns << className
+            }
+        } else if (line.startsWith("app:argType=\"")) {
+            def className = line.substring("app:argType=\"".length(), line.lastIndexOf("\""))
+
+            if (className.contains(".")) {
+                fqdns << className
+            }
+        }
+    }
+
+    project.file("proguard-rules-navigation.pro").write(fqdns.sort().collect {
+        "-keepnames class $it"
+    }.join("\n"))
+}
+
+preBuild.dependsOn(buildNavigationProguard)

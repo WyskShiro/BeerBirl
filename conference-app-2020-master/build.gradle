@@ -1,0 +1,145 @@
+import dependencies.Dep
+
+apply from: file('gradle/dependencyGraph.gradle')
+apply from: file('gradle/jvm.gradle')
+apply from: file('gradle/utils.gradle')
+
+buildscript {
+    ext {
+        isCi = System.getenv("CI") == "true"
+        isReleaseBuild = System.getenv("RELEASE_BUILD") == "true"
+    }
+    repositories {
+        mavenLocal()
+        google()
+        jcenter()
+
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url 'https://jitpack.io' }
+    }
+    dependencies {
+        classpath Dep.GradlePlugin.android
+        classpath Dep.GradlePlugin.kotlin
+        classpath Dep.GradlePlugin.kotlinSerialization
+        classpath Dep.GradlePlugin.playServices
+        classpath Dep.GradlePlugin.safeArgs
+        classpath Dep.GradlePlugin.jetifier
+        classpath Dep.GradlePlugin.licensesPlugin
+        classpath Dep.GradlePlugin.iconRibbonPlugin
+        classpath Dep.GradlePlugin.gradleVersionsPlugin
+        classpath Dep.GradlePlugin.crashlytics
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+
+        maven {
+            // https://issuetracker.google.com/issues/148316337#comment5
+            url "https://ci.android.com/builds/submitted/6167672/androidx_snapshot/latest/repository/"
+        }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-dev' }
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url "https://dl.bintray.com/soywiz/soywiz" }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven { url "https://dl.bintray.com/kotlin/ktor" }
+        maven { url "https://dl.bintray.com/kotlin/kotlinx" }
+        maven {
+            url "https://jitpack.io"
+            content {
+                excludeGroup("Kotlin/Native")
+            }
+        }
+    }
+    plugins.whenPluginAdded {
+        if (it.isAndroidApp() || it.isAndroidLibrary() || it.isDynamicFeature()) {
+            android.compileOptions {
+                sourceCompatibility JavaVersion.VERSION_1_8
+                targetCompatibility JavaVersion.VERSION_1_8
+            }
+
+            // for ktlint configruations. Do not use a ktlint plugin.
+            configurations {
+                ktlint
+            }
+
+            dependencies {
+                ktlint "com.pinterest:ktlint:0.36.0"
+            }
+
+            task ktlint(type: JavaExec, group: "verification") {
+                def parameters = [
+                        "--android",
+                        "--reporter=checkstyle,output=${buildDir}/ktlint/checkstyle.xml",
+                        "--reporter=html,output=${buildDir}/ktlint/checkstyle.html"
+                ]
+
+                parameters += ['src/**/*.kt', '**/*.gradle.kts']
+
+                description = 'Check Kotlin code style.'
+                args = parameters
+                main = 'com.pinterest.ktlint.Main'
+                classpath = configurations.ktlint
+            }
+
+            task ktlintFormat(type: JavaExec, group: "formatting") {
+                description = "Format Kotlin files based on code style."
+                classpath = configurations.ktlint
+                main = 'com.pinterest.ktlint.Main'
+                args '--android', '-F', 'src/**/*.kt', '**/*.gradle.kts'
+            }
+
+            task androidDependenciesExtra(dependsOn: 'androidDependencies') {
+                description 'Download extra dependencies for the CI Gradle Cache'
+                doLast {
+                    // androidDependencies do not touch some configurations
+                    configurations.findAll {
+                        it.name.matches(/(annotationProcessor|ktlint|kapt|_internal_aapt2_binary|lintClassPath)/) && it.canBeResolved
+                    }.files
+                }
+            }
+        }
+        if (it.class.name == "org.jetbrains.kotlin.gradle.internal.Kapt3GradleSubplugin") {
+            // Reference for 'kapt' DSL: https://kotlinlang.org/docs/reference/kapt.html#java-compiler-options
+            kapt {
+                // we expect this closure to run over a org.jetbrains.kotlin.gradle.plugin.KaptExtension
+                javacOptions {
+                    option("-source", "8")
+                    option("-target", "8")
+                }
+            }
+            // FIXME workaround
+            // I can not find `javax.annotation.Generated` without this
+            dependencies.compileOnly 'javax.annotation:javax.annotation-api:1.2'
+        }
+    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.AbstractKotlinCompile).all {
+        kotlinOptions.freeCompilerArgs += ["-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi"]
+    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions { jvmTarget = "1.8" }
+    }
+    tasks.matching { it instanceof Test }.all {
+        testLogging {
+            events = ["failed", "skipped"]
+            outputs.upToDateWhen { false }
+            showStandardStreams = true
+        }
+    }
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xmaxerrs" << "300"
+        }
+    }
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+apply plugin: "com.github.ben-manes.versions"

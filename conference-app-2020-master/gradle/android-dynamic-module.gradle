@@ -1,0 +1,32 @@
+import dependencies.Versions
+
+android {
+    compileSdkVersion Versions.androidCompileSdkVersion
+
+    defaultConfig {
+        minSdkVersion Versions.androidMinSdkVersion
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            proguardFiles 'proguard-rules-dynamic-features.pro'
+        }
+    }
+    lintOptions {
+        def lintFile = file("${project.projectDir}/lint.xml")
+        if (lintFile.exists()) {
+            lintConfig lintFile
+        }
+
+        checkReleaseBuilds !isCi
+        abortOnError !isCi
+    }
+    dataBinding.enabled = true
+}
+
+kotlin.sourceSets.all {
+    languageSettings {
+        progressiveMode = true
+    }
+}

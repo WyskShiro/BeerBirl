@@ -1,0 +1,61 @@
+import dependencies.Dep
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlin-kapt'
+
+apply from: rootProject.file('gradle/android.gradle')
+
+kotlin {
+    targets {
+        fromPreset(presets.android, 'android')
+    }
+    sourceSets {
+        commonMain.dependencies {
+            implementation Dep.Kotlin.stdlibCommon
+            implementation project(":model")
+            implementation Dep.Kotlin.coroutinesCommon
+        }
+        androidMain {
+            dependsOn commonMain
+            dependencies {
+                implementation Dep.Kotlin.stdlibJvm
+                implementation Dep.Kotlin.coroutines
+                implementation project(":corecomponent:androidcomponent")
+                implementation project(':ext:log')
+
+                implementation Dep.Kotlin.coroutinesPlayServices
+                implementation Dep.Firebase.auth
+                implementation Dep.Firebase.firestoreKtx
+                implementation Dep.AndroidX.lifecycleLiveData
+
+                implementation Dep.Dagger.core
+                implementation Dep.Dagger.androidSupport
+
+            }
+        }
+        commonTest.dependencies {
+            implementation Dep.Test.KotlinMultiPlatform.commonModuleTest
+            implementation Dep.Test.KotlinMultiPlatform.commonModuleTestAnnotations
+            implementation Dep.MockK.common
+        }
+        androidTest {
+            dependsOn commonMain
+            dependencies {
+                implementation Dep.Test.KotlinMultiPlatform.jvmModuleTest
+                implementation Dep.Test.KotlinMultiPlatform.jvmModuleTestJunit
+                implementation Dep.MockK.jvm
+            }
+        }
+    }
+}
+
+dependencies {
+    kapt Dep.Dagger.compiler
+    kapt Dep.Dagger.androidProcessor
+}
+
+
+configurations {
+    compileClasspath
+}

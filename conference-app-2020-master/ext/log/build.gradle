@@ -1,0 +1,41 @@
+import dependencies.Dep
+
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'com.android.library'
+
+apply from: rootProject.file('gradle/android.gradle')
+
+kotlin {
+    targets {
+        fromPreset(presets.android, 'android')
+    }
+    sourceSets {
+        commonMain.dependencies {
+            implementation Dep.Kotlin.stdlibCommon
+            api Dep.Timber.common
+        }
+        androidMain {
+            dependencies {
+                implementation Dep.Kotlin.stdlibJvm
+                api Dep.Timber.android
+            }
+        }
+        commonTest.dependencies {
+            implementation Dep.Test.KotlinMultiPlatform.commonModuleTest
+            implementation Dep.Test.KotlinMultiPlatform.commonModuleTestAnnotations
+            implementation Dep.MockK.common
+        }
+        androidTest {
+            dependencies {
+                implementation Dep.Test.KotlinMultiPlatform.jvmModuleTest
+                implementation Dep.Test.KotlinMultiPlatform.jvmModuleTestJunit
+                implementation Dep.MockK.jvm
+            }
+        }
+    }
+}
+
+
+configurations {
+    compileClasspath
+}

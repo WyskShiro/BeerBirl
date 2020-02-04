@@ -1,0 +1,69 @@
+import dependencies.Dep
+
+def ideaActive = System.getProperty("idea.active") == "true"
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlinx-serialization'
+
+apply from: rootProject.file('gradle/android.gradle')
+android.libraryVariants.all {
+    // TODO replace with https://issuetracker.google.com/issues/72050365 once released.
+    it.generateBuildConfigProvider.configure {
+        enabled = true
+    }
+}
+
+kotlin {
+    android("android")
+    sourceSets {
+        commonMain.dependencies {
+            implementation Dep.Kotlin.stdlibCommon
+            implementation Dep.Kotlin.coroutinesCommon
+            implementation Dep.Ktor.clientCommon
+            implementation Dep.Ktor.serializationCommon
+            implementation Dep.Kotlin.serializationCommon
+        }
+        androidMain {
+            dependsOn commonMain
+            dependencies {
+                implementation Dep.Kotlin.stdlibJvm
+                implementation Dep.Kotlin.androidCoroutinesDispatcher
+                implementation Dep.Ktor.clientAndroid
+                implementation Dep.Ktor.serializationJvm
+                implementation Dep.Kotlin.serializationAndroid
+                implementation Dep.OkHttp.client
+                implementation Dep.Stetho.stetho
+                implementation Dep.Dagger.core
+                implementation Dep.Dagger.androidSupport
+                implementation Dep.OkHttp.loggingInterceptor
+            }
+        }
+        androidTest {
+            dependsOn androidMain
+            dependencies {
+                implementation Dep.Test.junit
+                implementation Dep.Test.slf4j
+            }
+        }
+    }
+}
+
+android {
+    defaultConfig {
+        buildConfigField "String", "API_ENDPOINT", "\"http://deploy-preview-49--droidkaigi-api-dev.netlify.com/2020\""
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "API_ENDPOINT", "\"http://api.droidkaigi.jp/2020\""
+        }
+    }
+}
+
+dependencies {
+    kapt Dep.Dagger.compiler
+    kapt Dep.Dagger.androidProcessor
+}
